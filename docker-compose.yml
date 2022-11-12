@@ -1,0 +1,21 @@
+version: '3.9'
+
+services:
+  orbslam:
+    build: .
+    image: orbslam
+    platform: linux/arm64
+    container_name: orbslam
+    stdin_open: true
+    tty: true
+    command: bash
+    environment:
+      - DISPLAY=host.docker.internal:0
+      - ROS_IP=127.0.0.1
+    volumes:
+      - data:/data
+      - ./Datasets:/Datasets
+      - ${HOME}/.ssh:/root/.ssh
+      - ${HOME}/.gitconfig:/root/.gitconfig
+volumes:
+  data:
