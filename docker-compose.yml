@@ -2,20 +2,42 @@ version: '3.9'
 
 services:
   orbslam:
-    build: .
+    build:
+      context: .
+      dockerfile: ./Dockerfile
     image: orbslam
     platform: linux/arm64
-    container_name: orbslam
+    container_name: orbslam-dev
     stdin_open: true
     tty: true
     command: bash
+    cap_add:
+      - "SYS_PTRACE"
     environment:
       - DISPLAY=host.docker.internal:0
       - ROS_IP=127.0.0.1
     volumes:
-      - data:/data
-      - ./Datasets:/Datasets
+      - ${HOME}/shared_data:/data
+      - ${HOME}/bags:/bags
+      - ${HOME}/datasets:/datasets
+      - ${HOME}/projects:/projects
       - ${HOME}/.ssh:/root/.ssh
       - ${HOME}/.gitconfig:/root/.gitconfig
+  postgres:
+    image: kartoza/postgis:15-3
+    platform: linux/arm64
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+  pgadmin:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"
 volumes:
-  data:
+  pg_data:

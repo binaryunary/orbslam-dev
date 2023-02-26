@@ -91,12 +91,22 @@ RUN apt-get install -y python-rosdep
 RUN rosdep init
 RUN rosdep update
 
-RUN apt-get install -y vim
+RUN apt-get install -y \
+  vim \
+  postgresql-client \
+  inetutils-ping \
+  gdb \
+  libpcl-dev \
+  libeigen3-dev \
+  libodb-boost-dev \
+  odb \
+  libodb-pgsql-2.4 \
+  python-catkin-tools
 
 RUN apt-get clean
 
 RUN echo 'source /opt/ros/melodic/setup.bash' >> ~/.bashrc
-RUN echo 'export ROS_PACKAGE_PATH=${ROS_PACKAGE_PATH}:/ORB-SLAM3/Examples_old/ROS' >> ~/.bashrc
+RUN echo 'export ROS_PACKAGE_PATH=${ROS_PACKAGE_PATH}:/projects/ORB_SLAM3/Examples_old/ROS' >> ~/.bashrc
 
 WORKDIR /
 CMD ["bash"]
