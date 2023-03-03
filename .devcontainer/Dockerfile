@@ -65,19 +65,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   libdc1394-22-dev
 
 # Build & install OpenCV
-WORKDIR /tmp/OpenCV
-RUN wget -O opencv.zip https://github.com/opencv/opencv/archive/4.4.0.zip
-RUN wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/4.4.0.zip
-RUN unzip opencv.zip
-RUN unzip opencv_contrib.zip
-WORKDIR /tmp/OpenCV/build
-RUN cmake -GNinja -DOPENCV_EXTRA_MODULES_PATH=../opencv_contrib-4.4.0/modules ../opencv-4.4.0
-RUN ninja
-RUN ninja install
-WORKDIR /tmp
-RUN rm -rf /tmp/OpenCV
-
-RUN echo "export LIBGL_ALWAYS_INDIRECT=1" >> ~/.bashrc
+# WORKDIR /tmp/OpenCV
+# RUN wget -O opencv.zip https://github.com/opencv/opencv/archive/4.4.0.zip
+# RUN wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/4.4.0.zip
+# RUN unzip opencv.zip
+# RUN unzip opencv_contrib.zip
+# WORKDIR /tmp/OpenCV/build
+# RUN cmake -GNinja -DOPENCV_EXTRA_MODULES_PATH=../opencv_contrib-4.4.0/modules ../opencv-4.4.0
+# RUN ninja
+# RUN ninja install
+# WORKDIR /tmp
+# RUN rm -rf /tmp/OpenCV
 
 # Install ROS
 RUN echo "deb http://packages.ros.org/ros/ubuntu bionic main" > /etc/apt/sources.list.d/ros-latest.list
@@ -105,6 +103,7 @@ RUN apt-get install -y \
 
 RUN apt-get clean
 
+RUN echo "export LIBGL_ALWAYS_INDIRECT=1" >> ~/.bashrc
 RUN echo 'source /opt/ros/melodic/setup.bash' >> ~/.bashrc
 RUN echo 'export ROS_PACKAGE_PATH=${ROS_PACKAGE_PATH}:/projects/ORB_SLAM3/Examples_old/ROS' >> ~/.bashrc
 

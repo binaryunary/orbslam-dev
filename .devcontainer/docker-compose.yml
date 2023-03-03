@@ -1,10 +1,10 @@
 version: '3.9'
 
 services:
-  orbslam:
+  devcontainer:
     build:
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: Dockerfile
     image: orbslam
     platform: linux/arm64
     container_name: orbslam-dev
@@ -17,12 +17,10 @@ services:
       - DISPLAY=host.docker.internal:0
       - ROS_IP=127.0.0.1
     volumes:
-      - ${HOME}/shared_data:/data
+      - ${HOME}/.ssh:/root/.ssh
       - ${HOME}/bags:/bags
       - ${HOME}/datasets:/datasets
-      - ${HOME}/projects:/projects
-      - ${HOME}/.ssh:/root/.ssh
-      - ${HOME}/.gitconfig:/root/.gitconfig
+      - workspaces:/workspaces
   postgres:
     image: kartoza/postgis:15-3
     platform: linux/arm64
@@ -41,3 +39,4 @@ services:
       - "5050:80"
 volumes:
   pg_data:
+  workspaces:

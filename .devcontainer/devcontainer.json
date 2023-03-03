@@ -1,0 +1,7 @@
+{
+  "name": "orbslam",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "devcontainer",
+  "workspaceFolder": "/workspaces",
+  "shutdownAction": "stopCompose"
+}
