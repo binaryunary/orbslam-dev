@@ -99,13 +99,14 @@ RUN apt-get install -y \
   libodb-boost-dev \
   odb \
   libodb-pgsql-2.4 \
-  python-catkin-tools
+  python-catkin-tools \
+  ccache
 
 RUN apt-get clean
 
 RUN echo "export LIBGL_ALWAYS_INDIRECT=1" >> ~/.bashrc
 RUN echo 'source /opt/ros/melodic/setup.bash' >> ~/.bashrc
-RUN echo 'export ROS_PACKAGE_PATH=${ROS_PACKAGE_PATH}:/projects/ORB_SLAM3/Examples_old/ROS' >> ~/.bashrc
+RUN echo 'export PATH=/usr/lib/ccache:${PATH}' >> ~/.bashrc
 
 WORKDIR /
 CMD ["bash"]
