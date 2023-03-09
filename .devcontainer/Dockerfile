@@ -81,9 +81,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN echo "deb http://packages.ros.org/ros/ubuntu bionic main" > /etc/apt/sources.list.d/ros-latest.list
 RUN curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add -
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-      ros-melodic-desktop-full \
-      ros-melodic-usb-cam
+  apt-get install -y --no-install-recommends \
+  ros-melodic-desktop-full \
+  ros-melodic-usb-cam
 
 RUN apt-get install -y python-rosdep
 RUN rosdep init
@@ -106,7 +106,6 @@ RUN apt-get clean
 
 RUN echo "export LIBGL_ALWAYS_INDIRECT=1" >> ~/.bashrc
 RUN echo 'source /opt/ros/melodic/setup.bash' >> ~/.bashrc
-RUN echo 'export PATH=/usr/lib/ccache:${PATH}' >> ~/.bashrc
 
 WORKDIR /
 CMD ["bash"]
