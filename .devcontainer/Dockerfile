@@ -105,6 +105,7 @@ RUN apt-get install -y \
 RUN apt-get clean
 
 RUN echo "export LIBGL_ALWAYS_INDIRECT=1" >> ~/.bashrc
+RUN echo "export CCACHE_DIR=/ccache" >> ~/.bashrc
 RUN echo 'source /opt/ros/melodic/setup.bash' >> ~/.bashrc
 
 WORKDIR /

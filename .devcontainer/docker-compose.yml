@@ -21,6 +21,7 @@ services:
       - ${HOME}/bags:/bags
       - ${HOME}/datasets:/datasets
       - workspaces:/workspaces
+      - ccache:/ccache
   postgres:
     image: kartoza/postgis:15-3
     platform: linux/arm64
@@ -40,3 +41,4 @@ services:
 volumes:
   pg_data:
   workspaces:
+  ccache:
