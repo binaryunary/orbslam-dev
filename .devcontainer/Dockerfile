@@ -100,13 +100,14 @@ RUN apt-get install -y \
   odb \
   libodb-pgsql-2.4 \
   python-catkin-tools \
-  ccache
+  ccache \
+  python-pip \
+  python3-pip
 
 RUN apt-get clean
 
 RUN echo "export LIBGL_ALWAYS_INDIRECT=1" >> ~/.bashrc
 RUN echo "export CCACHE_DIR=/ccache" >> ~/.bashrc
-RUN echo 'source /opt/ros/melodic/setup.bash' >> ~/.bashrc
 
 WORKDIR /
 CMD ["bash"]
