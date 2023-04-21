@@ -20,25 +20,26 @@ services:
       - ${HOME}/.ssh:/root/.ssh
       - ${HOME}/bags:/bags
       - ${HOME}/datasets:/datasets
+      - ${HOME}/orbslam-out:/orbslam-out
       - workspaces:/workspaces
       - ccache:/ccache
-  postgres:
-    image: kartoza/postgis:15-3
-    platform: linux/arm64
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    volumes:
-      - pg_data:/var/lib/postgresql/data
-  pgadmin:
-    container_name: pgadmin4_container
-    image: dpage/pgadmin4
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: root
-    ports:
-      - "5050:80"
+  # postgres:
+  #   image: kartoza/postgis:15-3
+  #   platform: linux/arm64
+  #   environment:
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_PASSWORD=postgres
+  #   volumes:
+  #     - pg_data:/var/lib/postgresql/data
+  # pgadmin:
+  #   container_name: pgadmin4_container
+  #   image: dpage/pgadmin4
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: admin@admin.com
+  #     PGADMIN_DEFAULT_PASSWORD: root
+  #   ports:
+  #     - "5050:80"
 volumes:
-  pg_data:
+  # pg_data:
   workspaces:
   ccache:

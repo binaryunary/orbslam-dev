@@ -83,7 +83,8 @@ RUN curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt
 RUN apt-get update && \
   apt-get install -y --no-install-recommends \
   ros-melodic-desktop-full \
-  ros-melodic-usb-cam
+  ros-melodic-usb-cam \
+  ros-melodic-novatel-oem7-driver
 
 RUN apt-get install -y python-rosdep
 RUN rosdep init
@@ -105,6 +106,10 @@ RUN apt-get install -y \
   python3-pip
 
 RUN apt-get clean
+
+RUN pip install --extra-index-url https://rospypi.github.io/simple/ tf2_ros \
+  && pip install --extra-index-url https://rospypi.github.io/simple/ tf \
+  && pip install kitti2bag
 
 RUN echo "export LIBGL_ALWAYS_INDIRECT=1" >> ~/.bashrc
 RUN echo "export CCACHE_DIR=/ccache" >> ~/.bashrc
