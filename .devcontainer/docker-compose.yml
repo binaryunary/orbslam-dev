@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     image: orbslam
-    platform: linux/arm64
+    platform: linux/arm64 # this is for the M1 Mac, might need to change for other platforms
     container_name: orbslam-dev
     stdin_open: true
     tty: true
@@ -21,8 +21,10 @@ services:
       - ${HOME}/bags:/bags
       - ${HOME}/datasets:/datasets
       - ${HOME}/orbslam-out:/orbslam-out
+      - ${HOME}/shared-data:/shared-data
       - workspaces:/workspaces
       - ccache:/ccache
+  # This was used for M2SLAM
   # postgres:
   #   image: kartoza/postgis:15-3
   #   platform: linux/arm64
